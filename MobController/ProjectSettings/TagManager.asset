@@ -6,6 +6,9 @@ TagManager:
   tags:
   - wall2x
   - wall+10
+  - enemy
+  - soldier
+  - start
   layers:
   - Default
   - TransparentFX

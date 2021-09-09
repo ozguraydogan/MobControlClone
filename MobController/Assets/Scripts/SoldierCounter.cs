@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -27,6 +28,16 @@ public class SoldierCounter : MonoBehaviour
             other.gameObject.GetComponent<Collider>().enabled = false;
         }
 
+        if (other.gameObject.CompareTag("enemy"))
+        {
+           Destroy(other.gameObject);
+           Destroy(this.gameObject,0.1f);
+        }
+
+        if (other.gameObject.CompareTag("Finish"))
+        {
+            LevelManager.levelManager.EnemyHealthDecrease();
+        }
         isTrue = false;
     }
     private void OnTriggerExit(Collider other)

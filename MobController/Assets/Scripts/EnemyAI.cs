@@ -28,7 +28,7 @@ public class EnemyAI : MonoBehaviour
     {
         GameObject soldier = (GameObject) Instantiate(agent, firePoint.position, Quaternion.identity);
         soldier.GetComponent<SoldierAI>().target = targetObj;
-        Invoke("EnemySpawn",Random.Range(5,8));
+        Invoke("EnemySpawn",Random.Range(0.5f,1f));
     }
 
 
