@@ -35,12 +35,12 @@ public class LevelManager : MonoBehaviour
 
     public void RetryButton()
     {
-        GameManager.Manager.LevelCompleted(1);
+        GameManager.Manager.LevelCompleted();
     }
 
     public void NextLevelButton()
     {
-        GameManager.Manager.LevelRetry(1);
+        GameManager.Manager.LevelRetry();
     }
 
 }

@@ -7,30 +7,44 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public List<GameObject> levels;
-    private List<GameObject> insLevel;
+    public List<GameObject> insLevel;
     public static GameManager Manager;
     private GameObject start;
+    public int activeLevel=0; // Hangi level'de olduğumuz kayıt edilecek
+    private int levelCounter=0;
     private void Start()
     {
-        start= Instantiate(levels[0]);
-        insLevel.Add(start);
+        activeLevel = PlayerPrefs.GetInt("level");
         Manager = this;
+        if (activeLevel == 0)
+        {
+            start= Instantiate(levels[0]);
+            insLevel.Add(start);
+        }
+        else
+        {
+            start= Instantiate(levels[activeLevel]);
+            insLevel.Add(start);
+        }
     }
-    public void LevelCompleted(int counter)
+    public void LevelCompleted()
     {
         //Level silinmeden önce kamera level in child i ise çıkartılacak
         Camera.main.transform.parent = null;
-        Destroy(insLevel[0]);
-        GameObject ins=Instantiate(levels[counter+1]);
+        Destroy(insLevel[levelCounter]);
+        GameObject ins=Instantiate(levels[activeLevel+1]);
         Time.timeScale = 1f;
         insLevel.Add(ins);
+        activeLevel++;
+        levelCounter++;
+        PlayerPrefs.SetInt("level",activeLevel);
     }
     
-    public void LevelRetry(int counter)
+    public void LevelRetry()
     {
-        Destroy(insLevel[0]);
+        Destroy(insLevel[levelCounter]);
         insLevel.RemoveAt(0);
-        GameObject ins=Instantiate(levels[counter]);
+        GameObject ins=Instantiate(levels[activeLevel]);
         Time.timeScale = 1f;
         insLevel.Add(ins);
     }
