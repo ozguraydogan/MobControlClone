@@ -14,27 +14,24 @@ public class SpawnAI : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            isTrue = true;
+            InvokeRepeating("Spawn",0,0.5f);
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            isTrue = false;
+            CancelInvoke("Spawn");
         }
     }
 
-    private void FixedUpdate()
-    { 
-        if (isTrue)
-        {
-            StartCoroutine("SpawnAgent");
-        }
+    void Spawn()
+    {
+        StartCoroutine("SpawnAgent");
     }
-
     private IEnumerator SpawnAgent()
     {
-        GameObject soldier = (GameObject) Instantiate(agent, firePoint.position, Quaternion.identity);
+        GameObject soldier = (GameObject) Instantiate(agent , firePoint.position, Quaternion.identity);
+        soldier.transform.parent = this.transform.parent;
         soldier.GetComponent<SoldierAI>().target = targetObj.transform;
-        yield return new WaitForSeconds(10000*Time.deltaTime);
+        yield return new WaitForSeconds(0.5f);
     }
 }

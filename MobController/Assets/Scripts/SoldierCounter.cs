@@ -16,16 +16,16 @@ public class SoldierCounter : MonoBehaviour
         {
             for (int i = 0; i < 2; i++)
             {
-                Instantiate(soldier, new Vector3(this.transform.position.x+Random.Range(0.2f,0.3f),this.transform.position.y,this.transform.position.z+Random.Range(0.5f,0.8f)), Quaternion.identity);
-            }
+                GameObject clone =(GameObject)Instantiate(soldier, new Vector3(this.transform.position.x+Random.Range(0.2f,0.3f),this.transform.position.y,this.transform.position.z+Random.Range(0.5f,0.8f)), Quaternion.identity);
+                clone.transform.parent = LevelManager.levelManager.transform;            }
         }
-        if (other.gameObject.CompareTag("wall+10") && isTrue)
+        if (other.gameObject.CompareTag("wall4x") && isTrue)
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 4; i++)
             {
-                Instantiate(soldier, new Vector3(this.transform.position.x+Random.Range(0.2f,0.3f),this.transform.position.y,this.transform.position.z+Random.Range(0.5f,0.8f)), Quaternion.identity);
+                GameObject clone =(GameObject)Instantiate(soldier, new Vector3(this.transform.position.x+Random.Range(0.2f,0.3f),this.transform.position.y,this.transform.position.z+Random.Range(0.5f,0.8f)), Quaternion.identity);
+                clone.transform.parent = LevelManager.levelManager.transform;
             }
-            other.gameObject.GetComponent<Collider>().enabled = false;
         }
 
         if (other.gameObject.CompareTag("enemy"))
